@@ -1,95 +1,88 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./page.module.css";
+import { FormAddTask } from "./components/form";
+import { TaskCard, TaskCardProps } from "./components/taskCard";
+import { useEffect, useState } from "react";
+import { api } from "./utils/api";
 
 export default function Home() {
+  const mockupData: TaskCardProps[] = [
+    {
+      id: "1",
+      description: "Ir ao supermercado e comprar itens da lista",
+      task: "Fazer compras",
+      done: false,
+    },
+    {
+      id: "2",
+      description: "Assistir tutoriais e praticar programação com React",
+      task: "Estudar React",
+      done: true,
+    },
+    {
+      id: "3",
+      description: "Fazer exercícios físicos por pelo menos 30 minutos",
+      task: "Exercícios",
+      done: false,
+    },
+    {
+      id: "4",
+      description: "Ler pelo menos um capítulo de um livro",
+      task: "Leitura",
+      done: true,
+    },
+  ];
+
+  const [tasks, setTasks] = useState<TaskCardProps[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    const getTasks = async () => {
+      try {
+        const { data }: { data: TaskCardProps[] } = await api.get("task/");
+        setTasks(data);
+      } catch (e: any) {
+        console.log(e);
+      }
+      setLoading(false);
+    };
+
+    getTasks();
+  }, []);
+
+  if (loading) return <></>;
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{" "}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div className={styles.main}>
+      <main>
+        <header className={styles.header}>
+          <div className={styles.container}>
+            <div className={styles.logo}>
+              <Image
+                src={"/check-square.png"}
+                alt="todolist logo"
+                width={48}
+                height={48}
+              />
+              <span>To Do List</span>
+            </div>
+          </div>
+        </header>
+
+        <div className={styles.container}>
+          <FormAddTask />
+          <ul>
+            {tasks.map((task, i) => (
+              <TaskCard {...task} key={i} />
+            ))}
+            {mockupData.map((task, i) => (
+              <TaskCard {...task} key={i} />
+            ))}
+          </ul>
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }

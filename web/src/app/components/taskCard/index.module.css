@@ -1,0 +1,52 @@
+.card {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: 1px solid red;
+  padding: 8px;
+  border: 2px solid var(--white);
+  border-radius: 8px;
+}
+
+.card input {
+  min-width: 24px;
+  min-height: 24px;
+  width: 28px;
+  height: 28px;
+  accent-color: #70b145;
+  cursor: pointer;
+  margin: 8px;
+}
+
+.card div {
+  border-left: 2px solid var(--white);
+  border-right: 2px solid var(--white);
+  padding: 8px;
+  min-height: fit-content;
+  width: 100%;
+  color: var(--white);
+}
+
+.card h2 {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.card p {
+  font-size: 14px;
+}
+
+.card button {
+  background-color: transparent;
+  border: none;
+  opacity: 0.9;
+  padding: 12px;
+}
+
+.card button:hover {
+  opacity: 1;
+}
+
+.isDone {
+  text-decoration: line-through;
+}
