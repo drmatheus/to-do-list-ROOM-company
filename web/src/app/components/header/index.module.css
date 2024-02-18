@@ -1,0 +1,50 @@
+.header {
+  background-color: var(--green-2);
+  border-bottom: 4px solid var(--green-0);
+  padding: 16px;
+}
+
+.logo {
+  font-weight: 700;
+  color: var(--white);
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  background-color: var(--green-3);
+  width: fit-content;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: solid 2px var(--white-1);
+  color: var(--white-1);
+  position: relative;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.textContainer div {
+  margin-top: -8px;
+}
+
+.logo span {
+  font-size: 13px;
+  letter-spacing: 1.5px;
+}
+
+.logo > div > span:last-child {
+  letter-spacing: 10px;
+  font-size: 16px;
+}
+
+.leaf {
+  position: absolute;
+  left: 16px;
+}
+
+.logo span {
+  padding: 0px 4px;
+  margin-top: -4px;
+  border-bottom: 2px solid var(--white);
+}

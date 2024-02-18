@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { Input } from "../input";
 
@@ -8,11 +8,16 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { FieldError, FieldValues, useForm } from "react-hook-form";
 import { api } from "@/app/utils/api";
+import Image from "next/image";
 
-export const FormAddTask = () => {
+export const FormAddTask = ({
+  setLoading,
+}: {
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+}) => {
   const taskSchema = z.object({
     task: z.string().min(3, "Pelo menos 3 caracteres"),
-    description: z.string().min(1, "Descreva um pouco melhor sua tarefa"),
+    description: z.string().min(10, "Descreva um pouco melhor sua tarefa"),
   });
 
   const {
@@ -26,7 +31,7 @@ export const FormAddTask = () => {
   });
 
   const handleNewTask = async (task: FieldValues): Promise<void> => {
-    console.log(task);
+    setLoading(true);
     try {
       await api.post("/task", task);
 
@@ -36,26 +41,47 @@ export const FormAddTask = () => {
     }
   };
 
-  return (
-    <form onSubmit={handleSubmit(handleNewTask)} className={styles.form}>
-      <Input
-        label="Tarefa"
-        placeholder="Tarefa"
-        field="task"
-        register={register}
-        error={errors.task as FieldError}
-      />
-      <label htmlFor="">
-        <textarea
-          placeholder="Descrição"
-          {...register("description")}
-        ></textarea>
-        {errors.description?.message && (
-          <p className="">*{errors.description?.message as string}</p>
-        )}
-      </label>
+  const [isOpen, setIsOpen] = useState(false);
 
-      <button type="submit">Adicionar</button>
-    </form>
+  return (
+    <div className={styles.form}>
+      <div>
+        <span>Adicionar Tarefa</span>
+        <button
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+        >
+          <Image
+            alt="trash"
+            src={`/${isOpen ? "up" : "down"}-arrow.png`}
+            width={16}
+            height={18}
+          />
+        </button>
+      </div>
+      {isOpen && (
+        <form onSubmit={handleSubmit(handleNewTask)}>
+          <Input
+            label="Tarefa"
+            placeholder="Tarefa"
+            field="task"
+            register={register}
+            error={errors.task as FieldError}
+          />
+          <label htmlFor="">
+            <textarea
+              placeholder="Descrição"
+              {...register("description")}
+            ></textarea>
+            {errors.description?.message && (
+              <p className="">*{errors.description?.message as string}</p>
+            )}
+          </label>
+
+          <button type="submit">Adicionar</button>
+        </form>
+      )}
+    </div>
   );
 };

@@ -9,10 +9,18 @@ export type TaskCardProps = {
   task: string;
   done: boolean;
   id: string;
+  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const TaskCard = ({ task, description, done, id }: TaskCardProps) => {
+export const TaskCard = ({
+  task,
+  description,
+  done,
+  id,
+  setLoading,
+}: TaskCardProps) => {
   const handleDone = async (id: string) => {
+    setLoading(true);
     try {
       await api.put(`/task/${id}`);
     } catch (e: any) {
@@ -21,6 +29,7 @@ export const TaskCard = ({ task, description, done, id }: TaskCardProps) => {
   };
 
   const handleDelete = async (id: string) => {
+    setLoading(true);
     try {
       await api.delete(`/task/${id}`);
     } catch (e: any) {
@@ -31,19 +40,22 @@ export const TaskCard = ({ task, description, done, id }: TaskCardProps) => {
 
   return (
     <li className={styles.card}>
-      <input
-        type="checkbox"
-        defaultChecked={done}
-        onChange={() => handleDone(id)}
-      />
       <div className={isDone}>
-        <h2>{task}</h2>
+        <div>
+          <label htmlFor={id}>
+            <input
+              type="checkbox"
+              defaultChecked={done}
+              onChange={() => handleDone(id)}
+              name={id}
+            />
+          </label>
+          <h2>{task}</h2>
+        </div>
+
         <p>{description}</p>
       </div>
-      <button
-        title="Clique duplo para apagar"
-        onDoubleClick={() => handleDelete(id)}
-      >
+      <button onClick={() => handleDelete(id)}>
         <Image alt="trash" src={"/trash.png"} width={28} height={28} />
       </button>
     </li>

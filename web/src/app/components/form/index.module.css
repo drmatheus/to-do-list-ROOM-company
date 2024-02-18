@@ -1,19 +1,43 @@
 .form {
-  display: flex;
-  flex-direction: column;
-  background-color: var(--dark-blue);
-  padding: 24px 16px;
-  border-radius: 8px;
   margin: 0 auto;
   margin-top: 48px;
+  width: 100%;
+  background-color: var(--green-1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 8px;
+  height: fit-content;
+}
+
+.form > div {
+  display: flex;
+  width: 100%;
+  align-items: center;
+}
+
+.form > div > span {
+  color: var(--white-1);
+  font-size: 20px;
+  margin: 8px;
+}
+
+.form form {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--gray-1);
+  padding: 24px 16px;
+  border-radius: 8px;
+
   width: 100%;
   max-width: 600px;
 }
 
 .form label {
   width: 100%;
-  background-color: var(--white);
-  margin-bottom: 4px;
+  background-color: var(--white-1);
+  margin-bottom: 6px;
   position: relative;
 }
 
@@ -22,7 +46,7 @@
   bottom: 2px;
   font-size: 11px;
   left: 8px;
-  color: darkgoldenrod;
+  color: var(--green-1);
 }
 
 .form textarea {
@@ -30,7 +54,7 @@
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif, "Gill Sans MT",
     Calibri, "Trebuchet MS", sans-serif;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   padding: 8px;
   height: 96px;
   border: none;
@@ -38,26 +62,45 @@
   outline: none;
 }
 
-.form button {
+.form form > button {
   font-size: 16px;
   padding: 4px 16px;
   border: none;
-  background-color: var(--white);
-  border-bottom-left-radius: 4px;
-  border-bottom-right-radius: 4px;
+  background-color: var(--white-1);
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
   height: 40px;
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif, "Gill Sans MT",
     Calibri, "Trebuchet MS", sans-serif;
   color: dimgray;
+  color: var(--green-1);
+  font-weight: 500;
+  letter-spacing: 2px;
 }
 
-.form button:hover {
-  color: var(--white);
-  background-color: var(--dark-blue);
+.form button > img {
+  width: 20px;
+  height: 36px;
+  padding: 8px 0;
+  margin-top: -4px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 720px) {
   .form {
-    width: 100%;
+    min-width: 35%;
+    max-height: fit-content;
   }
+}
+
+.form > div > button {
+  background-color: transparent;
+  color: var(--green-1);
+  width: 28px;
+  height: 28px;
+  aspect-ratio: 1/1;
+  border-radius: 4px;
+  border: none;
+  font-size: 24px;
+  margin-left: auto;
+  margin-right: 8px;
 }
