@@ -18,6 +18,7 @@ export const FormAddTask = ({
   const taskSchema = z.object({
     task: z.string().min(3, "Pelo menos 3 caracteres"),
     description: z.string().min(10, "Descreva um pouco melhor sua tarefa"),
+    priority: z.string().refine((n) => Number(n) > 0 && Number(n) < 6),
   });
 
   const {
@@ -33,7 +34,7 @@ export const FormAddTask = ({
   const handleNewTask = async (task: FieldValues): Promise<void> => {
     setLoading(true);
     try {
-      await api.post("/task", task);
+      await api.post("/task", { ...task, priority: parseInt(task.priority) });
 
       reset();
     } catch (e: any) {
@@ -77,6 +78,18 @@ export const FormAddTask = ({
             {errors.description?.message && (
               <p className="">*{errors.description?.message as string}</p>
             )}
+          </label>
+          <p>Prioridade</p>
+          <label htmlFor="" className={styles.inputRange}>
+            <span>1</span>
+            <input
+              type="range"
+              min="1"
+              max="5"
+              step="1"
+              {...register("priority")}
+            />
+            <span>5</span>
           </label>
 
           <button type="submit">Adicionar</button>

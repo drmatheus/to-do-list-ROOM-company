@@ -1,0 +1,25 @@
+.priorityBar {
+  width: calc(100% - 16px);
+  height: 4px;
+  border-radius: 5px; /* Borda arredondada */
+  position: absolute;
+  padding: 0;
+  background: linear-gradient(
+    to right,
+    rgb(212, 47, 47),
+    rgb(247, 247, 75),
+    rgb(63, 151, 63)
+  );
+  bottom: 0;
+  /* border: 1px solid var(--gray-3); */
+  opacity: 0.8;
+  /* background-color: var(--green-3); */
+}
+
+.bar {
+  height: 100%;
+  background-color: var(--white-2);
+  padding: 0;
+
+  margin-left: auto;
+}

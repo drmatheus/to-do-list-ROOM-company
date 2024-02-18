@@ -19,6 +19,19 @@
   position: relative;
 }
 
+.imgContainer {
+  height: 60px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 8px;
+
+  -webkit-box-shadow: -2px 127px 75px 22px rgba(221, 221, 221, 1);
+  -moz-box-shadow: -2px 127px 75px 22px rgba(221, 221, 221, 1);
+  box-shadow: -2px 127px 75px 22px rgba(221, 221, 221, 1);
+}
+
 .textContainer {
   display: flex;
   flex-direction: column;

@@ -3,6 +3,11 @@ import Image from "next/image";
 import React from "react";
 import styles from "./index.module.css";
 import { api } from "@/app/utils/api";
+import {
+  calculateTimeDifference,
+  dateTimestampToDDMMYY,
+} from "@/app/utils/dateFormat";
+import { PriorityBar } from "../priorityBar";
 
 export type TaskCardProps = {
   description: string;
@@ -10,6 +15,9 @@ export type TaskCardProps = {
   done: boolean;
   id: string;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  createdAt: number;
+  updatedAt?: number;
+  priority: number;
 };
 
 export const TaskCard = ({
@@ -17,25 +25,35 @@ export const TaskCard = ({
   description,
   done,
   id,
+  priority,
+  createdAt,
+  updatedAt,
   setLoading,
 }: TaskCardProps) => {
   const handleDone = async (id: string) => {
-    setLoading(true);
     try {
       await api.put(`/task/${id}`);
+      setLoading(true);
     } catch (e: any) {
       console.log(e);
     }
   };
 
   const handleDelete = async (id: string) => {
-    setLoading(true);
     try {
       await api.delete(`/task/${id}`);
+      setLoading(true);
     } catch (e: any) {
       console.log(e);
     }
   };
+
+  const creationDate = dateTimestampToDDMMYY(createdAt);
+  const finishDate = updatedAt ? dateTimestampToDDMMYY(updatedAt) : "";
+  const timeToFinish = updatedAt
+    ? calculateTimeDifference(createdAt, updatedAt)
+    : "";
+
   const isDone = done ? styles.isDone : "";
 
   return (
@@ -58,6 +76,14 @@ export const TaskCard = ({
       <button onClick={() => handleDelete(id)}>
         <Image alt="trash" src={"/trash.png"} width={28} height={28} />
       </button>
+
+      <div className={styles.dates}>
+        <span>Criado: {creationDate}</span>
+        {finishDate && <span>Concluido: {finishDate}</span>}
+        {timeToFinish && <span>Tempo: {timeToFinish}</span>}
+      </div>
+
+      <PriorityBar value={priority} />
     </li>
   );
 };

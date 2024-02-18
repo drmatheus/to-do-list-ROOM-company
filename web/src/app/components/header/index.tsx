@@ -7,27 +7,13 @@ export const Header = () => {
   return (
     <header className={styles.header}>
       <div className={globalStyles.container}>
-        <div className={styles.logo}>
+        <div className={styles.imgContainer}>
           <Image
-            className={styles.leaf}
-            src={"/leaf.png"}
+            src={"/todolist_logo.png"}
             alt="todolist logo"
-            width={14}
-            height={14}
+            width={150}
+            height={60}
           />
-          <Image
-            src={"/notepad.png"}
-            alt="todolist logo"
-            width={30}
-            height={32}
-          />
-          <div className={styles.textContainer}>
-            <div>
-              <span>TO </span>
-              <span>DO </span>
-            </div>
-            <span>List</span>
-          </div>
         </div>
       </div>
     </header>

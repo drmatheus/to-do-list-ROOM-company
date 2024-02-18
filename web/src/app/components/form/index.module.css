@@ -19,7 +19,7 @@
 
 .form > div > span {
   color: var(--white-1);
-  font-size: 20px;
+  font-size: 16px;
   margin: 8px;
 }
 
@@ -87,7 +87,7 @@
 
 @media (min-width: 720px) {
   .form {
-    min-width: 35%;
+    max-width: 35%;
     max-height: fit-content;
   }
 }
@@ -103,4 +103,37 @@
   font-size: 24px;
   margin-left: auto;
   margin-right: 8px;
+}
+
+.form form > p {
+  background-color: var(--white-1);
+  margin-top: -5px;
+  color: var(--gray-2);
+  font-size: 13px;
+  padding-left: 8px;
+  padding-top: 4px;
+}
+
+.inputRange {
+  display: flex;
+  gap: 12px;
+  padding: 8px;
+}
+
+.inputRange span {
+  background-color: var(--green-1);
+  font-size: 8px;
+  aspect-ratio: 1/1;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  border-radius: 100%;
+  padding-top: 3px;
+  color: var(--white-1);
+}
+
+.inputRange input {
+  width: 100%;
+  margin: -8px;
+  accent-color: var(--green-1);
 }

@@ -19,8 +19,13 @@
   padding: 16px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
   margin-bottom: 32px;
+}
+
+.container ul li:first-child {
+  display: flex;
+  gap: 8px;
 }
 
 @media (min-width: 720px) {
@@ -31,5 +36,7 @@
 
   .container ul {
     margin-top: 48px;
+    min-width: 400px;
+    width: 70%;
   }
 }
