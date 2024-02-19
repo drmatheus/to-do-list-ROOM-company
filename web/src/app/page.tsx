@@ -3,27 +3,16 @@
 import styles from "./page.module.css";
 import { FormAddTask } from "./components/form";
 import { TaskCard } from "./components/taskCard";
-import { useEffect, useState } from "react";
-import { api } from "./utils/api";
+import { useContext, useEffect } from "react";
 import { Header } from "./components/header";
 import { Search } from "./components/search";
-import { TTaskArray } from "./interfaces";
+import { TTask } from "./interfaces";
 import { Order } from "./components/order";
+import { TaskContext } from "./context/tasksContext";
 
 export default function Home() {
-  const [loading, setLoading] = useState<boolean>(true);
-  const [tasks, setTasks] = useState<TTaskArray>([]);
-
-  const getTasks = async () => {
-    try {
-      const { data }: { data: TTaskArray } = await api.get("task/");
-      setTasks(data);
-    } catch (e: any) {
-      console.log(e);
-    } finally {
-      setLoading(false);
-    }
-  };
+  const { loading, getTasks, setLoading, setTasks, tasks } =
+    useContext(TaskContext);
 
   useEffect(() => {
     getTasks();
@@ -34,16 +23,14 @@ export default function Home() {
       <Header />
       <main>
         <div className={styles.container}>
-          <FormAddTask setLoading={setLoading} />
+          <FormAddTask />
           <ul>
             <li>
-              <Order setTasks={setTasks} />
-              <Search setTasks={setTasks} getTasks={getTasks} />
+              <Order />
+              <Search />
             </li>
             {!loading ? (
-              tasks.map((task) => (
-                <TaskCard {...task} setLoading={setLoading} key={task.id} />
-              ))
+              tasks.map((task: TTask) => <TaskCard {...task} key={task.id} />)
             ) : (
               <></>
             )}

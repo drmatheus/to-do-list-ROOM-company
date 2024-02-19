@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styles from "./index.module.css";
 import { Input } from "../input";
 
@@ -9,12 +9,9 @@ import { z } from "zod";
 import { FieldError, FieldValues, useForm } from "react-hook-form";
 import { api } from "@/app/utils/api";
 import Image from "next/image";
+import { TaskContext } from "@/app/context/tasksContext";
 
-export const FormAddTask = ({
-  setLoading,
-}: {
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
-}) => {
+export const FormAddTask = () => {
   const taskSchema = z.object({
     task: z.string().min(3, "Pelo menos 3 caracteres"),
     description: z.string().min(10, "Descreva um pouco melhor sua tarefa"),
@@ -30,6 +27,8 @@ export const FormAddTask = ({
     mode: "onBlur",
     resolver: zodResolver(taskSchema),
   });
+
+  const { setLoading } = useContext(TaskContext);
 
   const handleNewTask = async (task: FieldValues): Promise<void> => {
     setLoading(true);

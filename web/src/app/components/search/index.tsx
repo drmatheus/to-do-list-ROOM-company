@@ -1,33 +1,17 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styles from "./index.module.css";
-import { TaskCardProps } from "../taskCard";
-import { TTaskArray } from "@/app/interfaces";
+import { TaskContext } from "@/app/context/tasksContext";
 
-type TSearchProps = {
-  setTasks: React.Dispatch<
-    React.SetStateAction<TTaskArray> // Corrigir o tipo aqui
-  >;
-  getTasks: () => void;
-};
+export const Search: React.FC = () => {
+  const { setSearchTerm } = useContext(TaskContext);
 
-export const Search: React.FC<TSearchProps> = ({ setTasks, getTasks }) => {
-  const [searchTerm, setSearchTerm] = useState<string>("");
-
-  const handleSearch = () => {
-    setTasks((oldTasks: TTaskArray) => {
-      return oldTasks.filter(
-        (t) =>
-          t.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          t.task.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-    });
-  };
+  const [tempSearchTerm, setTempSearchTerm] = useState("");
 
   const handleBackspace = () => {
-    if (!searchTerm || searchTerm.length == 1) {
-      getTasks();
+    if (!tempSearchTerm || tempSearchTerm.length == 1) {
+      setSearchTerm("");
     }
   };
 
@@ -37,7 +21,7 @@ export const Search: React.FC<TSearchProps> = ({ setTasks, getTasks }) => {
         type="text"
         placeholder="Pesquisar..."
         onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-          setSearchTerm(e.target.value);
+          setTempSearchTerm(e.target.value);
         }}
         onKeyDown={(e) => {
           if (e.key === "Backspace") {
@@ -45,7 +29,7 @@ export const Search: React.FC<TSearchProps> = ({ setTasks, getTasks }) => {
           }
         }}
       />
-      <button type="button" onClick={handleSearch}>
+      <button type="button" onClick={() => setSearchTerm(tempSearchTerm)}>
         <Image src={"/search.png"} alt={""} width={22} height={22} />
       </button>
     </div>

@@ -1,36 +1,113 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# To do List
 
-## Getting Started
+## 1. Introdução
 
-First, run the development server:
+### 1.1 Visão Geral do Projeto
+
+O projeto Todo List foi desenvolvido em resposta a um teste técnico para a ROOM Company. Permite aos usuários gerenciar tarefas, incluindo adição, exclusão e marcação de conclusão.
+
+### 1.2 Objetivo e Finalidade
+
+O objetivo principal é desenvolver uma aplicação simples de gerenciamento de tarefas para atender às necessidades práticas dos usuários no controle de suas atividades diárias.
+
+### 1.3 Tecnologias Principais Utilizadas
+
+- Next.js
+- React
+- Zod
+- React Hook Form
+- Axios
+- TypeScript
+
+### 1.4 Extras
+
+Tomei liberdade para adicionar algumas funcionalidades que não foram solicitas pelo teste tecnico:
+
+- Nivel de prioridade
+- Pesquisa
+- Ordenação das tarefas
+- Data de adição e conclusão
+- Tempo gasto até a conclusão
+
+## 2 Configuração do Ambiente de Desenvolvimento e Iniciando o projeto
+
+### 2.1 Dependências necessárias
+
+- Certifique-se de ter o Node.js e o git instalado em sua máquina. Caso não tenha, você pode baixá-lo em [Node.js](https://nodejs.org/) e [git](https://git-scm.com/).
+
+### 2.2 Clonando e iniciando o projeto
+
+- Antes de iniciar o projeto certifique-se de ter a API já iniciada.
+
+1. Clone o repositório do projeto em seu ambiente local.
+
+```bash
+git clone https://github.com/drmatheus/to-do-list-ROOM-company
+```
+
+2. Navegue até o diretório do projeto.
+
+```bash
+cd to-do-list-ROOM-company
+```
+
+3. Navegue até o diretório do frontend.
+
+```bash
+cd web
+```
+
+4. Instale as dependencias necessárias.
+
+```bash
+npm install
+```
+
+5. Iniciando o projeto.
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Após seguir esses passos o projeto pode ser visualizado clicando [aqui](http://localhost:3000), ou acessando localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 3 Estrutura do Projeto
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+**/app:** <br>
+Contém o núcleo do projeto, incluindo arquivos essenciais como:
 
-## Learn More
+- page.tsx: Página principal do projeto.
+- page.module.css: Estilo modular específico para a página.
+- layout.tsx: Define a estrutura global da aplicação.
+- globals.css: Estilos globais aplicados em toda a aplicação.
 
-To learn more about Next.js, take a look at the following resources:
+**/components:** <br>
+Aqui encontram-se os componentes reutilizáveis da aplicação separados por diretorio juntamente da sua estilização. Componentes como cards, headers e outros componentes são colocados nesta pasta para facilitar a manutenção e a reutilização do código.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**/interfaces:** <br>
+Armazena interfaces que são compartilhadas em várias partes do código, com exceção das interfaces de props, que são geralmente mantidas junto com os componentes correspondentes.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+**/utils:** <br>
+Destinado a funções utilitárias e helpers que podem ser utilizadas em diferentes partes do projeto.
 
-## Deploy on Vercel
+**/context:** <br>
+Contém os contextos do projeto, facilitando a manutenção e auxiliando no gerenciamento de estados no React.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### 4 Desenvolvimento
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+O projeto foi desenvolvido utilizando Next.js (v14.1.0) e React.js (v18) como principais tecnologias.
+
+**Estilização:**<br>
+CSS Modular para escopo localizado e prevenção de conflitos.
+<br> **Gerenciamento de Estados:** <br>
+Utilização da Context API do React para compartilhar dados entre componentes.
+<br> **Requisições HTTP:** <br>
+Axios para simplificar interações com a API backend.
+<br> **Formularios** <br>
+Zod e react-hook-form foram escolhidos para simplificar e fortalecer a validação de dados em formulários.
+
+Essas escolhas foram feitas visando simplicidade, eficiência e facilidade de manutenção do código.
+
+### MADE BY:
+
+- [Matheus Dávila](https://github.com/drmatheus)

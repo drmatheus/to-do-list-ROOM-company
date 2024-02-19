@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useContext } from "react";
 import styles from "./index.module.css";
 import { api } from "@/app/utils/api";
 import {
@@ -8,13 +8,13 @@ import {
   dateTimestampToDDMMYY,
 } from "@/app/utils/dateFormat";
 import { PriorityBar } from "../priorityBar";
+import { TaskContext } from "@/app/context/tasksContext";
 
 export type TaskCardProps = {
   description: string;
   task: string;
   done: boolean;
   id: string;
-  setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   createdAt: number;
   updatedAt?: number;
   priority: number;
@@ -28,8 +28,9 @@ export const TaskCard = ({
   priority,
   createdAt,
   updatedAt,
-  setLoading,
 }: TaskCardProps) => {
+  const { setLoading } = useContext(TaskContext);
+
   const handleDone = async (id: string) => {
     try {
       await api.put(`/task/${id}`);
