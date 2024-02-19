@@ -18,8 +18,13 @@ export const createTaskService = (task: TTaskCreate) => {
 
 export const updateTaskService = (id: string) => {
   const index = database.findIndex((task) => task.id == id);
+
   database[index].done = !database[index].done;
-  database[index].updatedAt = Date.now();
+  if (database[index].done) {
+    database[index].updatedAt = Date.now();
+  } else {
+    delete database[index].updatedAt;
+  }
 
   return database[index];
 };
