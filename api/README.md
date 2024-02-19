@@ -1,92 +1,206 @@
-# Node.js Starter with Express and TypeORM
+# To do list API
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+API do to do list é responsavel por salvar os tarefas.
 
-This repository provides a starting point for Node.js projects using Express and TypeORM. It allows you to quickly kickstart a project by providing a basic structure with the necessary dependencies.
+## Tecnologias Utilizadas
 
-## Table of Contents
+Nesse projeto foi utilizado:
 
-- [Getting Started](#getting-started)
-- [Project Structure](#project-structure)
-- [Contributing](#contributing)
-- [License](#license)
+- [NodeJS](https://nodejs.org/en/)
 
-## Getting Started
+- [TypeScript](https://www.typescriptlang.org/)
 
-1. Fork this repository by clicking the "Fork" button on the top right corner of this page.
-2. Clone your forked repository to your local machine:
+- [Express](https://expressjs.com/)
 
+## Arquitetura do Projeto
+
+- controllers: Responsável por conter os controladores que lidam com as requisições da API. Cada controlador é responsável por tratar uma rota específica.
+
+- interfaces: Contém as interfaces TypeScript que definem os tipos personalizados usados na aplicação para garantir tipagem estática e melhorar a legibilidade do código.
+
+- middlewares: Armazena os middlewares personalizados, como validação de dados verificação de id, que são executados antes de chegar aos controladores.
+
+- routes: Contém as rotas da API definidas usando o Express, que direcionam as requisições HTTP aos controladores corretos.
+
+- schemas (do Zod): Armazena os esquemas do Zod, que são usados para validar os dados de entrada das requisições antes de serem processados pelos controladores.
+
+- services: Contém a lógica de negócios da aplicação, como operações de banco de dados e outras operações complexas, que não são diretamente relacionadas à camada de controle.
+
+- app.ts: O ponto de entrada da aplicação, onde a instância do Express é criada e configurada, incluindo middlewares globais.
+
+- database.ts: Conte o array que é utilizado como banco de dados.
+
+- error.ts: Gerencia o tratamento de erros da aplicação, como erros de validação e erros internos do servidor, garantindo respostas adequadas para os clientes.
+
+- Server.ts: Responsável por inicializar o servidor Express e ouvir as requisições na porta definida.
+
+## Iniciando o Projeto
+
+- Certifique-se de ter o Node.js e o Git instalados.
+
+1. Clone o repositório do projeto em seu ambiente local.
+
+```bash
+git clone https://github.com/drmatheus/to-do-list-ROOM-company
 ```
-git clone https://github.com/YOUR_USERNAME/repository-name.git
+
+2. Navegue até o diretório do projeto.
+
+```bash
+cd to-do-list-ROOM-company
 ```
 
-Navigate to the cloned directory:
+3. Navegue até o diretório da API.
 
-```
-cd repository-name
+```bash
+cd api
 ```
 
-Install the project dependencies:
+4. Instale as dependencias necessárias.
 
-```
+```bash
 npm install
 ```
 
-Rename the .env.example file to .env and update the environment variables as needed.
+5. Iniciando o projeto.
 
-Start the development server:
-
-```
+```bash
 npm run dev
 ```
 
-This will start the development server using nodemon, allowing you to make changes to the source code and see the updates automatically.
+- A api estará disponivel no endereço: [localhost:3001](https://localhost:3001)
 
-## Project Structure
+## ROTAS DA API
 
-The basic structure of this project follows this pattern:
+## ROTA /task
+
+O objeto task é definido como:
+
+| Campo       | Tipo   | Descrição           |
+| ----------- | ------ | ------------------- |
+| task        | string | Titulo da tarefa    |
+| description | string | Descrição da tarefa |
+| priority    | number | Prioridade de 1 - 5 |
+
+### Endpoints de tasks
+
+| Método | Rota     | Descrição                                                       |
+| ------ | -------- | --------------------------------------------------------------- |
+| POST   | task     | Cria uma task                                                   |
+| GET    | task     | Retorna todas as tasks                                          |
+| PUT    | task/:id | Atualiza da task para concluida e adiciona a data de conclusão. |
+| DELETE | task/:id | Apaga a task                                                    |
+
+### CRIAR TASK
+
+### Exemplo de Request:
 
 ```
-.
-├── src/
-│ ├── controllers/
-│ ├── entities/
-│ ├── interfaces/
-│ ├── middlewares/
-│ ├── migrations/
-│ ├── routes/
-│ ├── schemas/
-│ ├── services/
-│ ├── app.ts
-│ ├── data-source.ts
-│ ├── error.ts
-│ └── server.ts
-├── .env.example
-├── .gitignore
-├── package.json
-├── tsconfig.json
-└── README.md
+POST /task
+Content-type: application/json
 ```
 
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/controllers**</span> directory contains the application controllers.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/entities**</span> directory contains the TypeORM entities.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/interfaces**</span> directory contains the interfaces used in the project.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/middlewares**</span> directory contains the Express middlewares.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/migrations**</span> directory contains the TypeORM migrations.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/routes**</span> directory contains the API route definitions.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/schemas**</span> directory contains the Zod schemas (if applicable).<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/services**</span> directory contains the business logic services.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/app.ts**</span> file is responsible for configuring the Express application.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/data-source.ts**</span> file contains the database connection setup.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/error.ts**</span> file defines custom error classes.<br>
-<span style="background-color: #1082C2; color: white; padding: 1px 5px; border-radius: 5px;">**src/server.ts**</span> file starts the Express server.<br>
+### Corpo da Requisição:
 
-Feel free to modify the structure or add additional directories as per your project's requirements.<br>
+```json
+{
+  "task": "What is Lorem Ipsum?",
+  "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "priority": 3
+}
+```
 
-## Contributing
+### Exemplo de Response:
 
-If you want to contribute to this project, feel free to fork this repository and submit your changes via pull requests. I'll be glad to review and merge your contributions.
+```
+201 Created
+```
 
-## License
+```json
+{
+  "task": "What is Lorem Ipsum?",
+  "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "priority": 3,
+  "id": "97ulngg0",
+  "done": false,
+  "createdAt": 1708308244241
+}
+```
 
-This project is licensed under the MIT License.
+### LISTAR TASKS
+
+### Exemplo de Request:
+
+```
+GET /task
+Host: http://localhost:3000
+Content-type: application/json
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+[
+  {
+    "task": "What is Lorem Ipsum?",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+    "priority": 3,
+    "id": "97ulngg0",
+    "done": false,
+    "createdAt": 1708308244241
+  },
+  {
+    ...
+
+]
+```
+
+### ATUALIZAR TASK
+
+- Nesta rota a tarefa será apenas alterada para concluida e será adicionado uma data de conclusão no momento da requisição.
+
+### Exemplo de Request:
+
+```
+PUT /task/:taskId
+Host: http://localhost:3000
+Content-type: application/json
+```
+
+### Exemplo de Response:
+
+```
+200 OK
+```
+
+```json
+{
+  "task": "What is Lorem Ipsum?",
+  "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+  "priority": 3,
+  "id": "97ulngg0",
+  "done": true,
+  "createdAt": 1708308244241,
+  "updatedAt": 1708309016245
+}
+```
+
+### APAGAR TASK
+
+### Exemplo de Request:
+
+```
+DELETE /task/:taskId
+Host: http://localhost:3000
+Content-type: application/json
+```
+
+### Exemplo de Response:
+
+```
+204 NO CONTENT
+```
