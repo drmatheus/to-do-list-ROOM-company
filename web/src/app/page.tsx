@@ -34,6 +34,9 @@ export default function Home() {
             ) : (
               <></>
             )}
+            {tasks.length === 0 ? (
+              <h2>Você ainda não tem nenhuma tarefa adicionada</h2>
+            ) : null}
           </ul>
         </div>
       </main>

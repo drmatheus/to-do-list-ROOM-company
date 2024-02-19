@@ -23,6 +23,8 @@ export const Order: React.FC = () => {
         <option value="4">Mais antigo</option>
         <option value="5">Concluido </option>
         <option value="6">Não concluído</option>
+        <option value="7">Maior prioridade </option>
+        <option value="8">Menor prioridade</option>
       </select>
     </div>
   );

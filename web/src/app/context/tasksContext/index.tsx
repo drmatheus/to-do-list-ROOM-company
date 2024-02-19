@@ -2,13 +2,7 @@
 
 import { TTask, TTaskArray } from "@/app/interfaces";
 import { api } from "@/app/utils/api";
-import React, {
-  createContext,
-  useContext,
-  ReactNode,
-  useState,
-  useEffect,
-} from "react";
+import React, { createContext, ReactNode, useState, useEffect } from "react";
 
 interface ITaskContext {
   getTasks: () => void;
@@ -49,14 +43,19 @@ export const TaskProvider = ({ children }: { children: ReactNode }) => {
       case "4": // oldest
         return [...tasksToOrder].sort((a, b) => a.createdAt - b.createdAt);
 
-      case "6": // not done
-        return [...tasksToOrder].sort((a, b) =>
-          a.done === b.done ? 0 : a.done ? 1 : -1
-        );
       case "5": // done
         return [...tasksToOrder].sort((a, b) =>
           a.done === b.done ? 0 : a.done ? -1 : 1
         );
+      case "6": // not done
+        return [...tasksToOrder].sort((a, b) =>
+          a.done === b.done ? 0 : a.done ? 1 : -1
+        );
+      case "7": // high priority
+        return [...tasksToOrder].sort((a, b) => b.priority - a.priority);
+
+      case "8": // low priority
+        return [...tasksToOrder].sort((a, b) => a.priority - b.priority);
       default:
         return tasksToOrder;
     }

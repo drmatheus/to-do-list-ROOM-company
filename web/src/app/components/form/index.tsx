@@ -12,6 +12,9 @@ import Image from "next/image";
 import { TaskContext } from "@/app/context/tasksContext";
 
 export const FormAddTask = () => {
+  const { setLoading } = useContext(TaskContext);
+  const [isOpen, setIsOpen] = useState(true);
+
   const taskSchema = z.object({
     task: z.string().min(3, "Pelo menos 3 caracteres"),
     description: z.string().min(10, "Descreva um pouco melhor sua tarefa"),
@@ -28,24 +31,19 @@ export const FormAddTask = () => {
     resolver: zodResolver(taskSchema),
   });
 
-  const { setLoading } = useContext(TaskContext);
-
   const handleNewTask = async (task: FieldValues): Promise<void> => {
     setLoading(true);
     try {
       await api.post("/task", { ...task, priority: parseInt(task.priority) });
-
       reset();
     } catch (e: any) {
       console.log(e);
     }
   };
 
-  const [isOpen, setIsOpen] = useState(false);
-
   return (
     <div className={styles.form}>
-      <div>
+      <div className={styles.top}>
         <span>Adicionar Tarefa</span>
         <button
           onClick={() => {

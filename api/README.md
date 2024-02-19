@@ -1,6 +1,6 @@
 # To do list API
 
-API do to do list é responsavel por salvar os tarefas.
+API do to do list é responsavel por gerenciar as tarefas.
 
 ## Tecnologias Utilizadas
 

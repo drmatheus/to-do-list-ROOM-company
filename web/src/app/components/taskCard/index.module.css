@@ -46,6 +46,7 @@
 .card h2 {
   font-size: 16px;
   font-weight: 500;
+  margin-right: 32px;
 }
 
 .card p {
@@ -57,6 +58,9 @@
   border: none;
   opacity: 0.9;
   margin: 0;
+  position: absolute;
+  top: 8px;
+  right: 8px;
 }
 
 .card button:hover {
@@ -69,7 +73,7 @@
 
 .dates {
   position: absolute;
-  bottom: 12px;
+  bottom: 10px;
   display: flex;
   justify-content: space-between;
   font-size: 10px;

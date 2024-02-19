@@ -75,7 +75,7 @@ export const TaskCard = ({
         <p>{description}</p>
       </div>
       <button onClick={() => handleDelete(id)}>
-        <Image alt="trash" src={"/trash.png"} width={28} height={28} />
+        <Image alt="trash" src={"/trash-g-3.png"} width={28} height={28} />
       </button>
 
       <div className={styles.dates}>

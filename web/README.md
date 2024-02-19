@@ -4,7 +4,7 @@
 
 ### 1.1 Visão Geral do Projeto
 
-O projeto Todo List foi desenvolvido em resposta a um teste técnico para a ROOM Company. Permite aos usuários gerenciar tarefas, incluindo adição, exclusão e marcação de conclusão.
+O projeto To do List foi desenvolvido em resposta a um teste técnico para a ROOM Company. Permite aos usuários gerenciar tarefas, incluindo adição, exclusão e marcação de conclusão.
 
 ### 1.2 Objetivo e Finalidade
 
@@ -27,7 +27,7 @@ Tomei liberdade para adicionar algumas funcionalidades que não foram solicitas 
 - Pesquisa
 - Ordenação das tarefas
 - Data de adição e conclusão
-- Tempo gasto até a conclusão
+- Tempo decorrido até a conclusão
 
 ## 2 Configuração do Ambiente de Desenvolvimento e Iniciando o projeto
 
